@@ -1,0 +1,43 @@
+<html>
+    <head><title>Sudoku Solver</title>
+        <script type="text/javascript" src="jsSudoku.js"></script>
+        <style type='text/css'>
+            table {
+                border-spacing: 0px;
+                border-collapse: separate;
+            }
+            table.sudoku td{
+                border-right: solid #999999 1px;
+                border-bottom: solid #999999 1px;
+            }
+            table.sudoku tr:first-child td{
+                border-top: solid #000 2px;
+            }
+            table.sudoku tr:nth-child(3n) td{
+                border-bottom: solid #000 2px;
+            }
+            table.sudoku tr td:first-child{
+                border-left: solid #000 2px;
+            }
+            table.sudoku tr td:nth-child(3n){
+                border-right: solid #000 2px;
+            }
+            table.sudoku input{
+                border: solid black 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="divEntry">
+        </div>
+        <input type='button' value='Solve' onclick='solve(eId("divEntry"), eId("divResult"))'>
+        <input type='button' value='Clear' onclick='if(confirm("Are you sure?")){clearBoard(eId("divEntry"));}'>
+        <div id="divResult">
+        </div>
+    </body>
+    <script type='text/javascript'>
+        buildBoard(eId('divEntry'));
+    </script>
+</html>
+
+
