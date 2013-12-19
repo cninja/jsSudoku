@@ -8,4 +8,7 @@ implementations from either programmer, I decided to implement my own to see how
 that are discussed.
 
 ##Conclusions
-TBD on reading the article.
+After reading the articles, I see I implemented a solution similar to Norvig, but I did not include a separate constraint propagation step. Instead, I am just searching a 1 element array of guesses in solveStep(). It makes the code clener, but I probably loose some in effecency, however, the tests run quickly enough that I am not as concerned about its speed.
+
+
+Now off to implement the bits to complete answer problem 96 for my Project Euler account.
