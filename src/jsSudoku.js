@@ -44,9 +44,6 @@ function printBoard(e, b, doClear){
     }
     e.appendChild(t);
 }
-function arrays_equal(a1, a2){
-    return !(a1<a2 || a1>a2);
-}
 function assoc(a, i, d){
     var ans = a.slice(0);
     ans[i] = d;
@@ -94,38 +91,20 @@ function posabilitySpace(b){
         if(cell == 0){
             var validDigits = posibleDigits.filter(function(d){return isValidGuess(b, i, d)});
             if(validDigits.length == 0){
-                throw {idx:i,digit:0};
-            }else if(validDigits.length == 1){
-                throw {idx:i,digit:validDigits[0]};
+              throw {name:'Invalid board',idx:i};
             }else{
                 return [i,validDigits];
             }
         }else{
-            return [i,[cell]];
+            //Already determined
+            return [i,[]];
         }
-    });
-}
-function boardFromPosabilitySpace(s){
-    return s.map(function(digits){return (digits[1].length == 1 ? digits[1][0] : 0)});
-}
-
-
-function orderedIndexesToGuess(board){
-    return posabilitySpace(board).filter(function(a){return a[1].length >1}).sort(function(a,b){return a[1].length - b[1].length;})
+    }).filter(function(a){return a[1].length >0}).sort(function(a,b){return a[1].length - b[1].length;});
 }
 
 function solveStep(b){
-    var idxGuesses;
-    try{
-        idxGuesses = orderedIndexesToGuess(b);
-    }catch(ex){
-        if(ex.digit){
-            return solveStep(assoc(b,ex.idx,ex.digit));
-        }else{
-           //alert("invalid: " + ex.idx)
-           throw ex;
-        }
-    }
+    var idxGuesses = posabilitySpace(b);
+
     if(idxGuesses.length){
       var idx = idxGuesses[0][0];
       var guesses = idxGuesses[0][1];
